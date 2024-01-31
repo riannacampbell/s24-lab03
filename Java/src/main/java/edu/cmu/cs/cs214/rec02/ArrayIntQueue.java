@@ -72,13 +72,17 @@ public class ArrayIntQueue implements IntQueue {
     }
 
     /** {@inheritDoc} */
-    public boolean isEmpty() {
-        return size >= 0;
+    public boolean isEmpty() { // bug fixed
+        return size == 0;
     }
 
     /** {@inheritDoc} */
-    public Integer peek() {
-        return elementData[head];
+    public Integer peek() { // bug fixed
+        if (this.size() > 0) {
+            return elementData[head];
+        }
+        return null;
+        
     }
 
     /** {@inheritDoc} */
@@ -103,6 +107,8 @@ public class ArrayIntQueue implements IntQueue {
             }
             elementData = newData;
             head = 0;
+            size = 2 * oldCapacity + 1; //bug fixed
         }
     }
+    
 }
